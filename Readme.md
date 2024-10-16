@@ -18,13 +18,15 @@ function nr() {
   elif [[ -f "yarn.lock" ]]; then
     echo ">> yarn run $@"
     yarn run "$@"
-  else
+  elif [[ -f "package-lock.json" ]]; then
     echo ">> npm run $@"
     npm run "$@"
+  else
+    echo "❌ Not a valid project directory"
   fi
 }
 
-## Optional: Function to alias npx, pnpx, bunx, or yarn
+# Function to alias npx, pnpx, bunx, or yarn
 function nx() {
   if [[ -f "pnpm-lock.yaml" ]]; then
     echo ">> pnpx $@"
@@ -35,13 +37,15 @@ function nx() {
   elif [[ -f "yarn.lock" ]]; then
     echo ">> yarn $@"
     yarn "$@"
-  else
+  elif [[ -f "package-lock.json" ]]; then
     echo ">> npx $@"
     npx "$@"
+  else
+    echo "❌ Not a valid project directory"
   fi
 }
 
-# Optional: Function to install packages using npm, pnpm, bun, or yarn
+# Function to install packages using npm, pnpm, bun, or yarn
 function ni() {
   if [[ -f "pnpm-lock.yaml" ]]; then
     echo ">> pnpm install $@"
@@ -52,9 +56,11 @@ function ni() {
   elif [[ -f "yarn.lock" ]]; then
     echo ">> yarn install $@"
     yarn install "$@"
-  else
+  elif [[ -f "package-lock.json" ]]; then
     echo ">> npm install $@"
     npm install "$@"
+  else
+    echo "❌ Not a valid project directory"
   fi
 }
 ```
